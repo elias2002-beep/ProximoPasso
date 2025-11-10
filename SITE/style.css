@@ -1,0 +1,260 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita rolagem lateral */
+}
+
+.header-fixo {
+  position: fixed;           /* Fica fixo no topo mesmo com rolagem */
+  top: 0;                    /* Encosta no topo da página */
+  left: 0;                   /* Alinha à esquerda */
+  width: 100%;               /* Ocupa toda a largura da tela */
+  height: 95px;              /* Altura do cabeçalho */
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente sobre o vídeo */
+  color: #FF8200;            /* Texto laranja */
+  display: flex;             /* Flexbox para alinhar os itens */
+  align-items: center;       /* Centraliza verticalmente */
+  justify-content: space-between; /* Espaço entre logo e menu */
+  padding: 0 50px;           /* Espaçamento interno nas laterais */
+  box-sizing: border-box;    /* Inclui padding no cálculo total */
+  z-index: 1000;             /* Fica acima de todo o resto */
+  backdrop-filter: blur(6px);/* Dá um leve desfoque no fundo (opcional e bonito) */
+}
+
+/* ==========================================================
+   Caixa principal com vídeo de fundo (seção inicial do site)
+   ========================================================== */
+.caixa1 {
+  max-width: 100vw;              /* Garante que a largura máxima não ultrapasse o tamanho da janela do navegador */
+  position: relative;            /* Define um contexto para posicionamento absoluto de elementos internos (como o vídeo) */
+  width: 100vw;                  /* Faz a caixa ocupar exatamente a largura da viewport */
+  height: 100vh;                 /* Faz a caixa ocupar 100% da altura da tela visível */
+  overflow: hidden;              /* Esconde qualquer parte do vídeo que ultrapasse as bordas da caixa */
+}
+
+/* ==========================================================
+   Vídeo de fundo — ocupa toda a tela e fica atrás do conteúdo
+   ========================================================== */
+.caixa1 video {
+  max-width: 100vw;              /* Impede que o vídeo ultrapasse a largura da tela */
+  position: absolute;            /* Permite fixar o vídeo no topo e à esquerda da caixa */
+  top: 0;                        /* Encosta o vídeo no topo da tela */
+  left: 0;                       /* Encosta o vídeo na lateral esquerda */
+  width: 100%;                   /* Faz o vídeo cobrir 100% da largura da caixa */
+  height: 100%;                  /* Faz o vídeo cobrir 100% da altura da caixa */
+  object-fit: cover;             /* Corta o vídeo proporcionalmente para cobrir todo o espaço sem distorcer */
+  z-index: -1;                   /* Coloca o vídeo atrás dos outros elementos (texto, botões, etc.) */
+}
+
+/* ==========================================================
+   Logo fixa no canto superior esquerdo
+   ========================================================== */
+.logo1 {
+  position: fixed;               /* Mantém a logo sempre visível mesmo rolando a página */
+  top: 10px;                     /* Distância da borda superior da tela */
+  left: 10px;                    /* Distância da borda esquerda da tela */
+  width: 80px;                   /* Define a largura da logo */
+  height: auto;                  /* Ajusta automaticamente a altura para manter a proporção da imagem */
+  z-index: 10;                   /* Garante que a logo fique acima do vídeo */
+}
+
+/* ==========================================================
+   Texto fixo (exemplo: título) no canto superior esquerdo
+   ========================================================== */
+.topo-fixo {
+  position: fixed;               /* Fixa o texto na tela, independente da rolagem */
+  top: 25px;                     /* Distância do topo da tela */
+  left: 100px;                   /* Distância da borda esquerda */
+  z-index: 10;                   /* Garante que o texto fique acima do vídeo */
+  color: #FF8200;                /* Cor do texto (laranja) */
+  font-size: 40px;               /* Tamanho da fonte */
+  font-weight: 900;              /* Deixa o texto bem espesso */
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Fonte clássica serifada */
+}
+
+/* ==========================================================
+   Container dos botões no canto superior direito
+   ========================================================== */
+.caixa-botoes {
+  position: fixed;               /* Mantém os botões fixos mesmo rolando a página */
+  display: flex;                 /* Organiza os botões horizontalmente (lado a lado) */
+  gap: 20px;                     /* Espaço entre os botões */
+  top: 25px;                     /* Distância do topo da tela */
+  right: 100px;                  /* Distância da lateral direita da tela */
+}
+
+/* ==========================================================
+   Estilo dos botões de navegação
+   ========================================================== */
+.btn-hover {
+  padding: 12px 25px;            /* Espaçamento interno do botão (vertical, horizontal) */
+  font-size: 15px;               /* Tamanho da fonte */
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Fonte serifada */
+  font-weight: bold;             /* Texto em negrito */
+  color: #FF8200;                /* Cor do texto (laranja) */
+  border: 2px solid #FF8200;     /* Borda laranja */
+  border-radius: 8px;            /* Bordas arredondadas */
+  background: transparent;       /* Fundo transparente */
+  transition: 0.1s ease;         /* Animação suave ao passar o mouse */
+  cursor: pointer;               /* Mostra o cursor de mão */
+  text-decoration: none;         /* Remove sublinhado (caso o botão seja um link) */
+}
+
+/* Estado “hover” (quando o usuário passa o mouse por cima) */
+.btn-hover:hover {
+  background: #FF8200 !important; /* O fundo fica laranja */
+  color: black !important;        /* O texto muda para preto */
+}
+
+/* ==========================================================
+   Caixa 2 — seção abaixo do vídeo
+   Exibe texto e imagem lado a lado com Flexbox
+   ========================================================== */
+.caixa2 {
+  display: flex;                 /* Ativa o layout flexível para organizar conteúdo em linha */
+  align-items: center;           /* Centraliza o conteúdo verticalmente */
+  justify-content: space-between;/* Espaça o máximo possível entre o texto e a imagem */
+  height: 500px;                 /* Define altura fixa da caixa */
+  width: 100%;                   /* Ocupa toda a largura do elemento pai */
+  padding: 20px;                 /* Espaço interno (todos os lados) */
+  box-sizing: border-box;        /* Inclui o padding no cálculo total da largura/altura */
+  background-color: lightgray;   /* Cor de fundo (pode ser removida depois) */
+}
+
+/* ==========================================================
+   Texto dentro da caixa 2
+   ========================================================== */
+.texto1 {
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Fonte serifada */
+  display: flex;                 /* Usa Flexbox para empilhar título e parágrafo */
+  flex-direction: column;        /* Organiza os itens (título e parágrafo) em coluna */
+  align-items: center;           /* Centraliza o texto horizontalmente dentro da div */
+  max-width: 80%;                /* Limita a largura do bloco de texto */
+  text-align: center;            /* Centraliza o conteúdo textual */
+}
+
+/* Estilo do título dentro do texto */
+.texto1 h1 {
+  margin: 0 0 10px 0;            /* Remove margem superior e adiciona 10px abaixo */
+  font-size: 40px;               /* Define o tamanho do título */
+}
+
+/* Estilo do parágrafo dentro do texto */
+.texto1 p {
+  font-size: 22px;               /* Tamanho da fonte do parágrafo */
+  line-height: 2.5;              /* Espaçamento entre as linhas (mais “respirado”) */
+  margin: 0;                     /* Remove margens padrão do parágrafo */
+}
+
+/* ==========================================================
+   Logo ou imagem da direita na caixa 2
+   ========================================================== */
+.logo2 {
+  width: 500px;                  /* Define a largura da imagem */
+  height: auto;                  /* Mantém a proporção original */
+  margin-right: 50px;            /* Cria espaço entre a imagem e a borda direita */
+}
+
+.caixa3 {
+  display: flex;                 /* Ativa o layout flexível para organizar conteúdo em linha */
+  align-items: center;           /* Centraliza o conteúdo verticalmente */
+  justify-content: space-between;/* Espaça o máximo possível entre o texto e a imagem */
+  height:700px;                 /* Define altura fixa da caixa */
+  width: 100%;                   /* Ocupa toda a largura do elemento pai */
+  padding: 20px;                 /* Espaço interno (todos os lados) */
+  box-sizing: border-box;        /* Inclui o padding no cálculo total da largura/altura */
+  background-color: #FF8200;  /* Cor de fundo (pode ser removida depois) */
+}
+
+.texto2 {
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Fonte serifada */
+  display: flex;                 /* Usa Flexbox para empilhar título e parágrafo */
+  flex-direction: column;        /* Organiza os itens (título e parágrafo) em coluna */
+  justify-content: center;   /* centraliza verticalmente dentro da caixa */
+  align-items: center;           /* Centraliza o texto horizontalmente dentro da div */
+  max-width: 80%;                /* Limita a largura do bloco de texto */
+  text-align: center;            /* Centraliza o conteúdo textual */
+  margin-right: 10px;            /* Cria espaço entre a imagem e a borda direita */
+  margin-left: auto;   /*  empurra a div para o lado direito */
+  
+}
+
+/* Estilo do título dentro do texto */
+.texto2 h2 {
+  color: #000000;
+  margin: 0 0 10px 0;            /* Remove margem superior e adiciona 10px abaixo */
+  font-size: 40px;               /* Define o tamanho do título */
+}
+
+/* Estilo do parágrafo dentro do texto */
+.texto2 p {
+  color: #030303;
+  font-size: 22px;               /* Tamanho da fonte do parágrafo */
+  line-height: 2;              /* Espaçamento entre as linhas (mais “respirado”) */
+  margin: 0;                     /* Remove margens padrão do parágrafo */
+}
+
+.imagem {
+  width: 400px;          /* Define a largura da imagem (ajuste se quiser menor/maior) */
+  height: auto;          /* Mantém a proporção da imagem */
+  border-radius: 10px;   /* (Opcional) Deixa a imagem com cantos arredondados */
+  margin-left: 10px;     /* Espaço da borda esquerda da tela */
+}
+
+.caixa4 {
+  display: flex;                 /* Coloca tudo em linha: imagem esquerda, texto, imagem direita */
+  align-items: center;           /* Centraliza verticalmente */
+  justify-content: space-between;       /* Centraliza o conjunto no meio da tela */
+  height: 600px;                 /* Altura da seção */
+  width: 100%;                   /* Largura total */
+  background-color: lightgray;     /* Cor de fundo (igual ao estilo anterior) */
+  padding: 20px;
+  box-sizing: border-box;                  /* Espaço entre imagem e texto */
+}
+
+.texto3 {
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Fonte serifada */
+  display: flex;                 /* Usa Flexbox para empilhar título e parágrafo */
+  flex-direction: column;        /* Organiza os itens (título e parágrafo) em coluna */
+  justify-content: center;   /* centraliza verticalmente dentro da caixa */
+  align-items: center;           /* Centraliza o texto horizontalmente dentro da div */
+  max-width: 80%;                /* Limita a largura do bloco de texto */
+  text-align: center;            /* Centraliza o conteúdo textual */
+  margin-right: 0px;            /* Cria espaço entre a imagem e a borda direita */
+  margin-left: 50px;   /*  empurra a div para o lado direito */
+  
+}
+
+/* Estilo do título dentro do texto */
+.texto3 h3 {
+  color: #000000;
+  margin: 0 0 10px 0;            /* Remove margem superior e adiciona 10px abaixo */
+  font-size: 40px;               /* Define o tamanho do título */
+}
+
+/* Estilo do parágrafo dentro do texto */
+.texto3 p {
+  color: #030303;
+  font-size: 22px;               /* Tamanho da fonte do parágrafo */
+  line-height: 2;              /* Espaçamento entre as linhas (mais “respirado”) */
+  margin: 0;                     /* Remove margens padrão do parágrafo */
+}
+
+.img-esquerda {
+  margin-left: 10px; 
+  width: 300px;                  /* Tamanho da imagem (ajuste se quiser) */
+  height: auto;                  /* Mantém proporção */
+}
+
+.img-direita {
+  margin-right: 10px;   
+  width: 400px;                  /* Tamanho da imagem (ajuste se quiser) */
+  height: auto;                  /* Mantém proporção */
+}
+
+footer{
+  background-color: #FF8200;
+  width: 100%;               /* Ocupa toda a largura da tela */
+  height: 95px; 
+  margin: 0;
+}
