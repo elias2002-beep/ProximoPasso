@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Treinos (Gráfico e Registros)</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styledash.css">
+</head>
+
+<body>
+
+    <header class="header-fixo">
+        <div class="topo-fixo">
+            <span>Próximo Passo</span>
+        </div>
+
+        <div class="caixa-botoes">
+            <a href="site.html" class="btn-hover">HOME</a>
+        </div>
+
+        <div>
+            <img class="logo1" src="image/logo.png">
+        </div>
+    </header>
+
+    <div class="caixadash">
+        <h1 style="color: aliceblue;">Dashboard de Treinos</h1>
+
+        <canvas id="grafico" width="1000" height="500"></canvas>
+    </div>
+
+    <div class="caixadireita">
+        <h1 style="color: aliceblue;">Registros</h1>
+        <br><br>
+
+        <div class="registro" class="btn-hover">
+            
+            <div class="botaoregistro">
+                <input placeholder="Registre a Distância">
+                <button>Registrar</button>
+            </div>
+            
+            <div class="botaoregistro">
+                <input placeholder="Registre o dia">
+                <button>Registrar</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Dados estáticos para o gráfico
+        var diasSemana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+        var distancias = [5.0, 3.5, 0, 7.0, 4.0, 10.0, 0];
+
+        window.onload = function () {
+            const ctx = document.getElementById('grafico').getContext('2d');
+
+            var meuGrafico = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: diasSemana,
+                    datasets: [{
+                        label: 'Distância Percorrida (km)',
+                        data: distancias,
+                        backgroundColor: '#FF8200',
+                        borderColor: '#FF8200',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+
+</html>

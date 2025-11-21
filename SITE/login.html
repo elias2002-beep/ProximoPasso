@@ -8,36 +8,40 @@
     <title>Login</title>
 </head>
 
-<body>
+<body id="id_cadastro">
 
-    <body id="id_cadastro">
-
-        <header class="header-fixo">
-            <div class="topo-fixo">
-                <span>Próximo Passo</span>
-            </div>
-
-            <div class="caixa-botoes">
-                <a href="site.html" class="btn-hover">HOME</a>
-            </div>
-
-            <div>
-                <img class="logo1" src="image/logo.png">
-            </div>
-
-        </header>
-
-        <div class="caixa">
-            Usuário:<br>
-            <input id="id_usuario" placeholder="EX: Rogerelias..."><br>
-
-            Senha:<br>
-            <input id="id_Senha" type="password" placeholder="EX: roger123..."><br>
-
-            <button onclick="login()">Login</button>
-
+    <header class="header-fixo">
+        <div class="topo-fixo">
+            <span>Próximo Passo</span>
         </div>
 
-    </body>
+        <div class="caixa-botoes">
+            <a href="site.html" class="btn-hover">HOME</a>
+        </div>
+
+        <div>
+            <img class="logo1" src="image/logo.png">
+        </div>
+    </header>
+
+    <!-- Caixa de mensagem de erro -->
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro" style="display:none;">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
+    <div class="caixa">
+        Usuário:<br>
+        <input id="id_usuario" placeholder="EX: Rogerelias..."><br>
+
+        Senha:<br>
+        <input id="id_Senha" type="password" placeholder="EX: roger123..."><br>
+
+        <button onclick="login()">Login</button>
+    </div>
+
+    <script src="login.js"></script>
+</body>
 
 </html>

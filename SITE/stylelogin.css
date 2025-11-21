@@ -101,7 +101,7 @@ html, body {
 .caixa input,
 .caixa select {
   font-family: Georgia, 'Times New Roman', Times, serif;
-  width: 300px;
+  width: 300;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #ffffff;
@@ -110,7 +110,7 @@ html, body {
 
 button {
   font-family: Georgia, 'Times New Roman', Times, serif;
-  width: 300px;
+  width: 300;
   border-radius: 8px;
   border: 5px solid transparent;
   background-color: lightgray;

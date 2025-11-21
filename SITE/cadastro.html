@@ -2,65 +2,66 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="stylecadastro.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="stylecadastro.css">
 </head>
 
 <body id="id_cadastro">
 
-    <header class="header-fixo">
-        <div class="topo-fixo">
-            <span>Próximo Passo</span>
-        </div>
-
-        <div class="caixa-botoes">
-            <a href="site.html" class="btn-hover">HOME</a>
-            <a href="login.html" class="btn-hover">LOGIN</a>
-        </div>
-
-        <div>
-            <img class="logo1" src="image/logo.png">
-        </div>
-
-    </header>
-
-    <div class="caixa">
-        Usuário:<br>
-        <input id="id_usuario" placeholder="EX: Rogerelias..."><br>
-
-        Idade:<br>
-        <input id="id_idade" placeholder="EX: 23..."><br>
-
-        Nível de atividade física:<br>
-        <select id="id_atividade">
-            <option value="#" title="Escolha seu nível de atividade">Nível de Atividade Física...</option>
-            <option value="1" title="Uma vez no mês, ou quase nunca">Baixo</option>
-            <option value="2" title="De três, a quatro vezes no mês">Médio</option>
-            <option value="3" title="Mais de cinco vezes no mês">Alto</option>
-        </select><br>
-
-        Senha:<br>
-        <input id="id_Senha" type="password" placeholder="EX: roger123..."><br>
-
-        Confirme a senha:<br>
-        <input id="id_confirmasenha" type="password" placeholder="EX: roger123..."><br>
-        <br>
-
-        <button id="btnCadastrar" onclick="mostrarLogin()">Cadastrar</button>
-
-        <button href="login.html" id="btnLogin" style="display: none;">Login</button>
+  <header class="header-fixo">
+    <div class="topo-fixo">
+      <span>Próximo Passo</span>
     </div>
 
-    <div id="msg_div"></div>
+    <div class="caixa-botoes">
+      <a href="site.html" class="btn-hover">HOME</a>
+      <a href="login.html" class="btn-hover">LOGIN</a>
+    </div>
 
+    <div>
+      <img class="logo1" src="image/logo.png">
+    </div>
+  </header>
+
+  <div class="caixa">
+
+    Usuário:<br>
+    <input id="id_usuario" placeholder="EX: Rogerelias..."><br>
+      
+    Idade:<br>
+    <input id="id_idade" placeholder="EX: 23..."><br>
+
+    Nível de atividade física:<br>
+    <select id="id_atividade">
+      <option value="#">Nível de Atividade Física...</option>
+      <option value="1">Baixo</option>
+      <option value="2">Médio</option>
+      <option value="3">Alto</option>
+    </select><br>
+
+    Senha:<br>
+    <input id="id_Senha" type="password" placeholder="******"><br>
+
+    Confirme a senha:<br>
+    <input id="id_confirmasenha" type="password" placeholder="******"><br>
+    <br>
+
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button id="btnLogin" style="display: none;" onclick="window.location='login.html'">
+      Ir para Login
+    </button>
+
+  </div>
+
+  <div class="alerta_erro">
+    <div class="card_erro" id="msg_div">
+      <span id="mensagem_erro"></span>
+    </div>
+  </div>
+
+  <script src="cadastro.js"></script>
 </body>
-
-<script>
-    function mostrarLogin() {
-        document.getElementById("btnLogin").style.display = "block";
-    }
-</script>
 
 </html>

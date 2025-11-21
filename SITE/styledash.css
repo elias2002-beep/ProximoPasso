@@ -1,0 +1,189 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: #FF8200;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    /* Usa Flexbox para alinhar as caixas caixadash e caixadireita lado a lado */
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+/* --- 2. HEADER E NAVEGAÇÃO --- */
+.header-fixo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 95px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #FF8200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    box-sizing: border-box;
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+}
+
+.topo-fixo {
+    position: fixed;
+    top: 25px;
+    left: 100px;
+    z-index: 10;
+    color: #FF8200;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.caixa-botoes {
+    position: fixed;
+    top: 25px;
+    right: 100px;
+    display: flex;
+    gap: 20px;
+}
+
+.btn-hover {
+    padding: 12px 25px;
+    font-size: 15px;
+    border: 2px solid #FF8200;
+    border-radius: 8px;
+    background: transparent;
+    color: #FF8200;
+    font-weight: bold;
+    transition: .1s;
+}
+
+.btn-hover:hover {
+    background: #FF8200 !important;
+    color: black !important;
+}
+
+.logo1 {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 80px;
+    height: auto;
+    z-index: 10;
+}
+
+/* --- 3. CAIXA DO DASHBOARD (ESQUERDA) --- */
+.caixadash {
+    /* Largura mantida (Atenção: precisa ser menor que 100% para caber ao lado da caixadireita) */
+    max-width: 700px;
+    width: 90%;
+    margin-left: 10px;
+    margin-top: 105px;
+    margin-bottom: 10px;
+    background: #0a0a0ac4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ffffff;
+    box-sizing: border-box;
+    height: calc(100vh - 115px);
+}
+
+.caixadash h1 {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- 4. GRÁFICO --- */
+#grafico {
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    width: 100% !important;
+    height: 350px !important;
+    /* Margem aumentada para descer o gráfico */
+    margin-top: 150px;
+}
+
+/* --- 5. CAIXA DE REGISTRO (DIREITA) --- */
+.caixadireita {
+    width: 800px;
+    height: 100px;
+
+    /* Propriedades para aparecer e se alinhar no Flexbox do body */
+    background: #0a0a0ac4;
+    margin-top: 105px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+    height: calc(100vh - 115px);
+}
+
+.caixadireita h1 {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- 6. FORMULÁRIO DE REGISTRO E BOTÕES --- */
+/* Estilo para as inputs */
+.registro input {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 300px;
+    /* Ajustado para replicar o padding do .btn-hover */
+    padding: 12px 25px;
+
+    /* Ajustado para replicar o estilo do .btn-hover */
+    font-size: 15px;
+    border: 2px solid #FF8200;
+    border-radius: 8px;
+    background: transparent;
+    /* Deixa o fundo transparente como os botões */
+    color: #FF8200;
+    /* Cor do texto como os botões */
+    font-weight: bold;
+    /* Deixa o texto em negrito como os botões */
+
+    outline: none;
+    /* Espaçamento entre os inputs */
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    /* Garante que o padding não aumente o width total */
+}
+
+/* Estilo para os botões de registro */
+.botaoregistro {
+    display: flex;
+    flex-direction: row;
+    /* Espaçamento entre os blocos de registro */
+    margin-bottom: 15px;
+    /* Altura removida para ser definida pelo padding do button */
+    height: 30px;
+    border-radius: 8px;
+}
+
+.botaoregistro button {
+    /* Ajustado para replicar o padding do .btn-hover */
+
+    font-size: 15px;
+
+    border-radius: 8px;
+    border: 2px solid #FF8200;
+    margin-left: 20px;
+
+    /* Adicionado para replicar o estilo do .btn-hover */
+    background: transparent;
+    color: #FF8200;
+    font-weight: bold;
+    transition: .1s;
+    /* Adiciona a transição de hover */
+    cursor: pointer;
+    /* Adiciona o cursor de ponteiro */
+}
+
+/* Estilo de hover para os botões de registro */
+.botaoregistro button:hover {
+    background: #FF8200 !important;
+    color: black !important;
+}
