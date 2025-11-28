@@ -1,0 +1,207 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: #FF8200;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    gap: 20px;
+    overflow: hidden;
+}
+
+.header-fixo {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 95px;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 50px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.topo-fixo {
+    position: fixed;
+    top: 25px;
+    left: 100px;
+
+    font-size: 40px;
+    font-weight: 900;
+    color: #FF8200;
+}
+
+.caixa-botoes {
+    display: flex;
+    gap: 20px;
+    position: fixed;
+    right: 100px;
+    top: 25px;
+}
+
+.btn-hover {
+    padding: 12px 25px;
+    font-size: 15px;
+
+    border: 2px solid #FF8200;
+    border-radius: 8px;
+    background: transparent;
+
+    color: #FF8200;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-hover:hover {
+    background: #FF8200 !important;
+    color: black !important;
+}
+
+.logo1 {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 80px;
+}
+
+.caixadash {
+    width: 55%;
+    height: calc(100vh - 120px);
+
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+
+    margin-left: 10px;
+    margin-top: 110px;
+    padding: 20px;
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ffffff;
+
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.caixadash h1 {
+    color: white;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+.caixadash canvas#grafico {
+    width: 100% !important;
+    height: calc(100% - 50px) !important;
+    border-radius: 8px;
+    background: #f8f8f8;
+}
+
+.caixadireita {
+    width: 45%;
+    height: calc(100vh - 120px);
+
+    margin-top: 110px;
+
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ffffff;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.registro {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.botaoregistro {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.botaoregistro input {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 2px solid #FF8200;
+    border-radius: 8px;
+    background: transparent;
+    color: #FF8200;
+    font-weight: bold;
+    outline: none;
+}
+
+.botaoregistro button {
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 2px solid #FF8200;
+    background: transparent;
+    color: #FF8200;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botaoregistro button:hover {
+    background: #FF8200;
+    color: black;
+}
+
+.kpis {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.kpi-card {
+    width: 96%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid #ffffff20;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+
+    color: white;
+
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 8px #00000080;
+}
+
+.kpi-card h2 {
+    margin: 0 0 6px 0;
+    font-size: 16px;
+}
+
+.kpi-card span {
+    font-size: 20px;
+    font-weight: bold;
+}

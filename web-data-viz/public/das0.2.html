@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard de Treinos (Próximo Passo)</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/das0.2.css" />
+    <link rel="icon" href="image/logo.png" type="img/png">
+</head>
+
+<body>
+
+    <header class="header-fixo">
+        <div class="topo-fixo"><span>Próximo Passo</span></div>
+
+        <div class="caixa-botoes">
+            <a href="index.html" class="btn-hover">HOME</a>
+        </div>
+
+        <div><img class="logo1" src="image/logo.png" alt="logo" /></div>
+    </header>
+
+    <div class="caixadash">
+        <h1>Dashboard de Treinos Semanais</h1>
+        <canvas id="grafico"></canvas>
+    </div>
+
+    <div class="caixadireita">
+        <h1 style="color: aliceblue; text-align: center;">Registros da Semana</h1>
+
+        <div class="registro">
+
+            <div class="botaoregistro">
+                <input id="input_distancia" placeholder="Distância (km/m)" />
+                <input id="input_dia" placeholder="Dia da Semana" />
+                <button id="btnRegistrar">Registrar</button>
+            </div>
+
+            <div class="kpis">
+                <div class="kpi-card">
+                    <h2>Total de Treinos</h2>
+                    <span id="totalTreinos">0</span>
+                </div>
+
+                <div class="kpi-card">
+                    <h2>Dia com Mais Treinos</h2>
+                    <span id="diaMaisTreino">-</span>
+                </div>
+
+                <div class="kpi-card">
+                    <h2>Distância Total (km/m)</h2>
+                    <span id="distanciaTotal">0 km/m</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        var meuGrafico = null;
+
+        window.onload = function () {
+            document.getElementById("btnRegistrar").addEventListener("click", registrarTreino);
+            carregarDashboard();
+        };
+
+        function registrarTreino() {
+            var usuario_idvar = sessionStorage.ID_USUARIO;
+            var dist = document.getElementById("input_distancia").value.trim().toLowerCase();
+            var dia = document.getElementById("input_dia").value.trim();
+
+            if (!dist || !dia) {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            dist = dist.replace(/\s+/g, "");
+
+            let distanciaKm = 0;
+
+            if (dist.endsWith("m") && !dist.includes("km")) {
+                let metros = parseFloat(dist.replace("m", ""));
+                distanciaKm = metros / 1000;
+            }
+
+            else if (dist.endsWith("km")) {
+                distanciaKm = parseFloat(dist.replace("km", "").replace(",", "."));
+            }
+
+            else if (dist.includes("km") && dist.includes("m")) {
+                let [kmParte, mParte] = dist.split("km");
+                let km = parseFloat(kmParte.replace(",", "."));
+                let metros = parseFloat(mParte.replace("m", ""));
+                distanciaKm = km + (metros / 1000);
+            }
+
+            else {
+                distanciaKm = parseFloat(dist.replace(",", "."));
+            }
+
+            if (!distanciaKm && distanciaKm !== 0) {
+                alert("Distância inválida!");
+                return;
+            }
+
+            fetch("/treino/registrar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    usuario_id: usuario_idvar,
+                    distancia: distanciaKm,
+                    dia_semana: dia
+                })
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error("Erro no registro: " + res.status);
+                    return res.json();
+                })
+                .then(() => {
+                    input_distancia.value = "";
+                    input_dia.value = "";
+                    carregarDashboard();
+                })
+                .catch(erro => {
+                    console.error("Erro ao registrar treino:", erro);
+                    alert("Erro ao registrar");
+                });
+        }
+
+
+        function carregarDashboard() {
+            var usuarioId = sessionStorage.ID_USUARIO;
+
+            if (!usuarioId) {
+                alert("Usuário não logado!");
+                window.location.href = "login.html";
+                return;
+            }
+
+            fetch(`/treino/listar/${usuarioId}`)
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("Erro ao buscar treinos: " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(function (dados) {
+                    atualizarKpis(dados);
+                    atualizarGrafico(dados);
+                })
+                .catch(function (erro) {
+                    console.error("Erro ao carregar dashboard:", erro);
+                });
+        }
+
+        function atualizarKpis(dados) {
+            totalTreinos.innerText = dados.length;
+
+            var totalKm = dados.reduce(function (acc, item) {
+                return acc + Number(item.distancia);
+            }, 0);
+            distanciaTotal.innerText = totalKm + " km/m";
+
+            var contagem = {};
+            dados.forEach(function (item) {
+                var d = item.dia_semana || "—";
+                contagem[d] = (contagem[d] || 0) + 1;
+            });
+
+            var diaMais = "-";
+            var maior = 0;
+
+            var dias = []; 
+
+            for (let dia in contagem) {
+                dias.push(dia);
+            }
+
+            for (let i = 0; i < dias.length; i++) {
+                let d = dias[i];
+                if (contagem[d] > maior) {
+                    maior = contagem[d];
+                    diaMais = d;
+                }
+            }
+
+            diaMaisTreino.innerText = diaMais + " (" + maior + " treinos)";
+        }
+
+
+        function atualizarGrafico(dados) {
+
+            var labels = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+
+            var values = labels.map(function (dia) {
+                var item = dados.find(function (t) {
+                    return t.dia_semana.toLowerCase() === dia.toLowerCase();
+                });
+                return item ? Number(item.distancia) : 0;
+            });
+
+
+            var ctx = grafico.getContext("2d");
+
+            if (meuGrafico) {
+                meuGrafico.destroy();
+            }
+
+            meuGrafico = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Distância (km/m)",
+                        data: values,
+                        backgroundColor: "#FF8200",
+                        borderColor: "#FF8200",
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>

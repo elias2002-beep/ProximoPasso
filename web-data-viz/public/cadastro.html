@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="css/stylecadastro.css">
+  <link rel="icon" href="image/logo.png" type="img/png">
+</head>
+
+<body id="id_cadastro">
+
+  <header class="header-fixo">
+    <div class="topo-fixo">
+      <span>Próximo Passo</span>
+    </div>
+
+    <div class="caixa-botoes">
+      <a href="index.html" class="btn-hover">HOME</a>
+      <a href="login.html" class="btn-hover">LOGIN</a>
+    </div>
+
+    <div>
+      <img class="logo1" src="image/logo.png">
+    </div>
+  </header>
+
+  <div class="caixa">
+
+    Usuário:<br>
+    <input id="id_usuario" placeholder="EX: Rogerelias..."><br>
+
+    Idade:<br>
+    <input id="id_idade" placeholder="EX: 23..."><br>
+
+    Senha:<br>
+    <input id="id_Senha" type="password" placeholder="******"><br>
+
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button id="btnLogin" style="display: none;" onclick="window.location='login.html'">
+      Ir para Login
+    </button>
+
+  </div>
+
+  <div class="alerta_erro">
+    <div class="card_erro" id="msg_div">
+      <span id="mensagem_erro"></span>
+    </div>
+  </div>
+
+  <script>
+
+    function exibirMensagem(texto) {
+      msg_div.style.display = "block";
+      mensagem_erro.innerHTML = texto;
+
+      setTimeout(sumirMensagem, 3000);
+    }
+
+    function sumirMensagem() {
+      msg_div.style.display = "none";
+      mensagem_erro.innerHTML = "";
+    }
+
+    function cadastrar() {
+      var usuarioVar = id_usuario.value;
+      var idadeVar = id_idade.value;
+      var senhaVar = id_Senha.value;
+
+
+      if (
+        usuarioVar == "" ||
+        idadeVar == "" ||
+        senhaVar == ""
+      ) {
+        exibirMensagem("Preencha todos os campos para prosseguir.");
+        return false;
+      }
+
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          usuarioServer: usuarioVar,
+          idadeServer: idadeVar,
+          senhaServer: senhaVar
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            exibirMensagem("Cadastro realizado com sucesso! Redirecionando para a tela de Login...");
+
+            setTimeout(() => {
+              window.location = "login.html";
+            }, "3000");
+
+          } else {
+            resposta.json().then(json => {
+              exibirMensagem(`Houve um erro ao tentar realizar o cadastro: ${json.erro || 'Erro desconhecido.'}`);
+            });
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO de Rede: ${resposta}`);
+          exibirMensagem("Erro de comunicação com o servidor.");
+        });
+
+      return false;
+    }
+  </script>
+</body>
+
+</html>

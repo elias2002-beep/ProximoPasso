@@ -1,0 +1,175 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.header-fixo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 95px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #FF8200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  box-sizing: border-box;
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+}
+
+.caixa1 {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.caixa1 video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.logo1,
+.topo-fixo,
+.caixa-botoes {
+  position: fixed;
+  z-index: 10;
+}
+
+.logo1 {
+  top: 10px;
+  left: 10px;
+  width: 80px;
+  height: auto;
+}
+
+.topo-fixo {
+  top: 25px;
+  left: 100px;
+  color: #FF8200;
+  font-size: 40px;
+  font-weight: 900;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.caixa-botoes {
+  display: flex;
+  gap: 20px;
+  top: 25px;
+  right: 100px;
+}
+
+.btn-hover {
+  padding: 12px 25px;
+  font-size: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  color: #FF8200;
+  border: 2px solid #FF8200;
+  border-radius: 8px;
+  background: transparent;
+  transition: 0.1s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-hover:hover {
+  background: #FF8200 !important;
+  color: black !important;
+}
+
+.caixa2,
+.caixa3,
+.caixa4 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.caixa2 {
+  height: 500px;
+  background-color: lightgray;
+}
+
+.texto1,
+.texto2,
+.texto3 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 80%;
+  text-align: center;
+}
+
+.texto1 h1,
+.texto2 h2,
+.texto3 h3 {
+  margin: 0 0 10px 0;
+  font-size: 40px;
+}
+
+.texto1 p,
+.texto2 p,
+.texto3 p {
+  font-size: 22px;
+  margin: 0;
+}
+
+.texto1 p { line-height: 2.5; }
+.texto2 p,
+.texto3 p { line-height: 2; }
+
+.logo2 {
+  width: 500px;
+  height: auto;
+  margin-right: 50px;
+}
+
+.caixa3 {
+  height: 700px;
+  background-color: #FF8200;
+}
+
+.imagem {
+  width: 400px;
+  height: auto;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.caixa4 {
+  height: 600px;
+  background-color: lightgray;
+  margin-bottom: 0px;
+}
+
+.img-esquerda,
+.img-direita {
+  width: 300px;
+  height: auto;
+  border-radius: 5%;
+  border: 2px solid #FF8200;
+}
+
+.img-direita { margin-right: 10px; }
+.img-esquerda { margin-left: 10px; }
+
+footer {
+  background-color: #FF8200;
+  width: 100%;
+  height: 70px;
+  margin-top: 0px;
+}

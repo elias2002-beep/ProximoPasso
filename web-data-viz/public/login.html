@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stylelogin.css">
+    <link rel="icon" href="image/logo.png" type="img/png">
+    <title>Login</title>
+</head>
+
+<body id="id_cadastro">
+
+    <header class="header-fixo">
+        <div class="topo-fixo">
+            <span>Próximo Passo</span>
+        </div>
+
+        <div class="caixa-botoes">
+            <a href="index.html" class="btn-hover">HOME</a>
+        </div>
+
+        <div>
+            <img class="logo1" src="image/logo.png">
+        </div>
+    </header>
+
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro" style="display:none;">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
+    <div class="caixa">
+        Usuário:<br>
+        <input id="id_usuario" placeholder="EX: Rogerelias..."><br>
+
+        Senha:<br>
+        <input id="id_senha" type="password" placeholder="EX: roger123..."><br>
+
+        <button onclick="login()">Login</button>
+    </div>
+
+    <script>
+
+      function exibirMensagem(texto) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = texto;
+
+      setTimeout(sumirMensagem, 4000);
+    }
+
+    function sumirMensagem() {
+      cardErro.style.display = "none";
+      mensagem_erro.innerHTML = "";
+    }
+
+        function login() {
+
+            var usuarioVar = id_usuario.value;
+            var senhaVar = id_senha.value;
+
+            if (usuarioVar == "" || senhaVar == "") {
+                exibirMensagem("(Mensagem de erro para todos os campos em branco)");
+                return false;
+            }
+
+            console.log("FORM USUARIO: ", usuarioVar);
+            console.log("FORM SENHA: ", senhaVar);
+
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+
+                    usuarioServer: usuarioVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO login()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    exibirMensagem("Login realizado com sucesso!");
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+
+
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.id;
+
+                        setTimeout(function () {
+                            window.location = "das0.2.html";
+                        }, 3000);
+
+                    });
+
+                } else {
+                    exibirMensagem("Houve um erro ao tentar realizar o login!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        exibirMensagem("Erro ao tentar fazer login: " + texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+                exibirMensagem("Erro de rede. Verifique sua conexão ou o servidor.");
+            })
+
+            return false;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz – Próximo Passo</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="image/logo.png" type="img/png">
+</head>
+
+<body>
+
+    <header class="header-fixo">
+        <div class="topo-fixo">
+            <span>Próximo Passo</span>
+        </div>
+        <div class="caixa-botoes">
+            <a href="index.html" class="btn-hover">HOME</a>
+        </div>
+        <div>
+            <img class="logo1" src="image/logo.png" alt="Logo">
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Quiz – Conhecimentos de Corrida</h1>
+        <p class="sub">Teste seu conhecimento sobre corrida!</p>
+
+        <form id="quizForm" onsubmit="return minhaFuncaoQuiz()">
+
+            <div class="pergunta">
+                <h3>1. Qual músculo é mais utilizado durante a corrida?</h3>
+                <label><input type="radio" name="p1" value="0"> Bíceps</label>
+                <label><input type="radio" name="p1" value="1"> Quadríceps</label>
+                <label><input type="radio" name="p1" value="0"> Trapézio</label>
+                <label><input type="radio" name="p1" value="0"> Peitoral</label>
+            </div>
+
+            <div class="pergunta">
+                <h3>2. Qual é o melhor tipo de pisada para correr?</h3>
+                <label><input type="radio" name="p2" value="0"> Pisada totalmente no calcanhar</label>
+                <label><input type="radio" name="p2" value="1"> Pisada no meio do pé</label>
+                <label><input type="radio" name="p2" value="0"> Pisada só na ponta do pé</label>
+                <label><input type="radio" name="p2" value="0"> Qualquer uma é ideal</label>
+            </div>
+
+            <div class="pergunta">
+                <h3>3. O que é pace?</h3>
+                <label><input type="radio" name="p3" value="0"> Frequência cardíaca média</label>
+                <label><input type="radio" name="p3" value="1"> Tempo para percorrer 1 km</label>
+                <label><input type="radio" name="p3" value="0"> Número total de treinos</label>
+                <label><input type="radio" name="p3" value="0"> Distância total percorrida</label>
+            </div>
+
+            <div class="pergunta">
+                <h3>4. Qual item é o mais importante para prevenir lesões na corrida?</h3>
+                <label><input type="radio" name="p4" value="0"> Camisa térmica</label>
+                <label><input type="radio" name="p4" value="1"> Tênis adequado</label>
+                <label><input type="radio" name="p4" value="0"> Boné esportivo</label>
+                <label><input type="radio" name="p4" value="0"> Luva de compressão</label>
+            </div>
+
+            <div class="pergunta">
+                <h3>5. Qual é a principal causa de câimbras durante a corrida?</h3>
+                <label><input type="radio" name="p5" value="0"> Dormir poucas horas</label>
+                <label><input type="radio" name="p5" value="1"> Falta de hidratação e minerais</label>
+                <label><input type="radio" name="p5" value="0"> Usar roupa muito quente</label>
+                <label><input type="radio" name="p5" value="0"> Correr muito rápido</label>
+            </div>
+
+            <button type="submit" class="btn">Finalizar Quiz</button>
+        </form>
+
+        <div id="resultado" class="resultado oculto"></div>
+    </div>
+
+</body>
+<script>
+    var formularioQuiz = document.getElementById('quizForm');
+
+    var divResultado = document.getElementById('resultado');
+
+    // variaveis
+    var totalPerguntas = 5;
+
+    var acertos = 0;
+
+    // Vetor
+    var nomesDasPerguntas = ["p1", "p2", "p3", "p4", "p5"];
+
+    // Função 
+    function minhaFuncaoQuiz() {
+
+        acertos = 0;
+
+        var todasRespondidas = true;
+
+        // laço de repetição 
+        for (var i = 0; i < totalPerguntas; i++) {
+
+            var nomeAtual = nomesDasPerguntas[i];
+
+            var opcoes = formularioQuiz.elements[nomeAtual];
+
+            var respondida = false;
+            var valorResposta = 0;
+
+            for (var contador = 0; contador < opcoes.length; j++) {
+
+                var opcaoAtual = opcoes[contador];
+
+                if (opcaoAtual.checked) {
+
+                    valorResposta = opcaoAtual.value;
+
+                    respondida = true;
+                    break;
+                }
+            }
+
+            if (respondida === false) {
+                alert("Atenção: Por favor, responda todas as perguntas");
+                todasRespondidas = false;
+                break;
+            }
+
+            // Operação matemática
+            acertos = acertos + Number(valorResposta);
+        }
+
+        if (todasRespondidas) {
+
+            var mensagemFeedback = "";
+
+            if (acertos == totalPerguntas) {
+                mensagemFeedback = "<p>Excelente! Você entende muito!</p>";
+
+            } else if (acertos >= 3) {
+                mensagemFeedback = "<p>Muito bom! Continue assim!</p>";
+
+            } else {
+                mensagemFeedback = "<p>Continue estudando!</p>";
+            }
+
+            divResultado.innerHTML =
+                "<h2>Resultado Final</h2>" +
+                "<p>Você acertou <b>" + acertos + "</b> de <b>" + totalPerguntas + "</b> perguntas!</p>" +
+                mensagemFeedback;
+
+            divResultado.className = "resultado";
+        }
+
+        return false; // impede envio
+    }
+</script>
+
+</html>
